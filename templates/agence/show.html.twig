@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %} {# ettendre le template de base #}
+ {% block body %}   {# ettendre le body de base #}
+     <voiture>   {# je declare une seule voiture  #}
+            <h2>{{voiture.titre}}</h2>
+            <div class="metadata">créer le 12/06/2020 à 19:00 dans catégorie </div>
+            <div class="content">
+                <img src="{{voiture.image}}" alt="">
+                {{voiture.description | raw}}
+                {{voiture.prix | raw}}
+
+        
+            </div>
+        </voiture>
+
+ {% endblock %}
