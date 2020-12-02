@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% form_theme formVoiture 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+
+<h1> Creation d'une  !</h1>
+
+{#{{form(formVoiture)}}#}
+{{ form_start(formVoiture) }}
+{#{{form_widget(formVoiture)}}#}
+{{ form_row(formVoiture.titre,{'attr':{'placeholder':"Tire de La Voiture"}}) }}
+{{ form_row(formVoiture.categorie)}}
+
+{{ form_row(formVoiture.description,{'attr':{'placeholder':"Le contenu La Voiture"}}) }}
+{{ form_row(formVoiture.prix ,{'attr':{'placeholder':"Le prix de la voiture"}}) }}
+{{ form_row(formVoiture.image ,{'attr':{'placeholder':"L'URL de La Voiture"}}) }}
+
+
+
+ <div class="form group">
+        <button type="submit" class="btn btn-success">
+    {%if editMode %}
+        Enregister les modifications
+        {% else %}
+        Ajouter d'une voiture
+        {% endif %}
+        </button>
+    </div>
+   
+
+
+{{ form_end(formVoiture) }}
+
+{% endblock %}

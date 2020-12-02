@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+
+
+{% block body %}
+
+
+<h1> Creation d'une  categorie !</h1>
+{{ form_start(formCategorie) }}
+{{ form_widget(formCategorie) }}
+<button type="submit" class="btn btn-success">Créer</button>
+{{ form_end(formCategorie) }}
+{% endblock %}
