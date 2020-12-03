@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\CategoriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategorieRepository::class)
+ * @ORM\Entity(repositoryClass=CategoriesRepository::class)
  */
-class Categorie
+class Categories
 {
     /**
      * @ORM\Id
@@ -30,13 +30,13 @@ class Categorie
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Voiture::class, mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="categories")
      */
-    private $voitures;
+    private $articles;
 
     public function __construct()
     {
-        $this->voitures = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -69,29 +69,29 @@ class Categorie
     }
 
     /**
-     * @return Collection|Voiture[]
+     * @return Collection|Articles[]
      */
-    public function getVoitures(): Collection
+    public function getArticles(): Collection
     {
-        return $this->voitures;
+        return $this->articles;
     }
 
-    public function addVoiture(Voiture $voiture): self
+    public function addArticle(Articles $article): self
     {
-        if (!$this->voitures->contains($voiture)) {
-            $this->voitures[] = $voiture;
-            $voiture->setCategorie($this);
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setCategories($this);
         }
 
         return $this;
     }
 
-    public function removeVoiture(Voiture $voiture): self
+    public function removeArticle(Articles $article): self
     {
-        if ($this->voitures->removeElement($voiture)) {
+        if ($this->articles->removeElement($article)) {
             // set the owning side to null (unless already changed)
-            if ($voiture->getCategorie() === $this) {
-                $voiture->setCategorie(null);
+            if ($article->getCategories() === $this) {
+                $article->setCategories(null);
             }
         }
 
