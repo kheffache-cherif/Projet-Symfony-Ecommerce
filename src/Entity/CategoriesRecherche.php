@@ -20,7 +20,7 @@ class CategoriesRecherche
         return $this->Categories;
     }
 
-    public function setCategory(?Categories $Categories): self
+    public function setCategories(?Categories $Categories): self
     {
         $this->Categories = $Categories;
 

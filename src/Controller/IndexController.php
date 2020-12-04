@@ -199,7 +199,7 @@ class IndexController extends AbstractController  //tous les controller doivent 
       $articles= [];
 
       if($form->isSubmitted() && $form->isValid()) {
-        $categories = $categoriesRecherche->getCategory();
+        $categories = $categoriesRecherche->getCategories();
        
         if ($categories!="") 
         {
