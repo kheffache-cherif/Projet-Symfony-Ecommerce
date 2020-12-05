@@ -22,11 +22,12 @@ class SecurityController extends AbstractController
 * @Route("/inscription", name="security_inscription")
 */
 public function inscription(Request $request, 
-EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
-{
-    $membre = new Membres();
+EntityManagerInterface $manager ,UserPasswordEncoderInterface $encoder)
 
-    $form = $this->createForm(InscriptionType::class,$membre);
+{
+    $user = new Membres();
+
+    $form = $this->createForm(InscriptionType::class,$user);
         
     $form->handleRequest($request);  //analyse la request
     
@@ -34,18 +35,20 @@ EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
 
     
 
-    if($form->isSubmitted() && $form->isValid())//si tout est soumi et tous les champs sont valides
-       
-    $hash = $encoder->encodePassword( $membre,$membre->getPassword());
-    $membre->setPassword($hash);
+    if($form->isSubmitted() && $form->isValid()){//si tout est soumi et tous les champs sont valides
+
+   $hash = $encoder->encodePassword( $user,$user->getPassword());
+   $user->setPassword($hash);
     
     
 
     
-        $manager->persist($membre);//persister dans le temps mon nouveau memebre
+        $manager->persist($user);//persister dans le temps mon nouveau memebre
         $manager->flush();//fait le reelement
 
-        //return $this->redirectToRoute('security_connexion');
+        return $this->redirectToRoute('security_connexion');
+    }
+       //
 
     return $this->render('security/inscription.html.twig',
     [
@@ -53,20 +56,24 @@ EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     ]);
 
     }
-    /**
- * @Route("/connexion",name="security_login")
- */
-public function login(AuthenticationUtils  $authenticationUtils)
-{
-     // get the login error if there is one
-$error = $authenticationUtils->getLastAuthenticationError();
-
-// last username entered by the user
-$lastUsername = $authenticationUtils->getLastUsername();
-    
-    return $this->render('security/connexion.html.twig',['lastUsername'=>$lastUsername,
-                                                    'error' => $error]);
-}
-}
+        /** 
+         * @Route("/connexion", name="security_connexion")
+         */
+        public function connexion( AuthenticationUtils $auth){
+            $error = $auth-> getLastAuthenticationError();
+            return $this->render('security/connexion.html.twig',[
+                'error' => $error
+            ]);
+        }
 
 
+         /** 
+         * @Route("/deconnexion",name="security_deconnexion")
+         */
+        public function deconnexion(){
+            //return $this->redirectToRoute('article_list');
+            
+        }
+
+
+    }

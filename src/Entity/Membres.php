@@ -9,15 +9,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
 /**
-    * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+    * @ORM\Entity(repositoryClass="App\Repository\MembresRepository")
     * @UniqueEntity(
-    *   fields={"email"},
-    * message="L'émail que vous avez tapé est déjà utilisé !"
+    *fields={"email"},
+    *message="L'émail que vous avez tapé est déjà utilisé !"
     * )
     */
-class Membres implements UserInterface
-{
+class Membres Implements UserInterface{
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -52,7 +53,7 @@ class Membres implements UserInterface
 
     /**
     * @Assert\EqualTo(propertyPath = "password",
-    * message="Vous n'avez pas saisile même mot de passe !" )
+    * message="Vous n'avez pas saisi le même mot de passe !" )
     */
 
     private $confirm_password; 
