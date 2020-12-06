@@ -57,6 +57,15 @@ class Membres Implements UserInterface{
     */
 
     private $confirm_password; 
+
+    /**
+    * @ORM\Column(type="json")
+    */
+    private $roles = [];
+
+
+
+
     public function getConfirmPassword()
     {
         return $this->confirm_password;
@@ -121,10 +130,24 @@ class Membres Implements UserInterface{
         return $this;
     }
 
-    public function getRoles()
-{
-return ['ROLE_USER'];
-}
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+    // garantit que chaque utilisateur possède le rôle ROLE_USER
+    // équvalent à array_push() qui ajoute un élément au tabeau
+          $roles[] = 'ROLE_USER'; 
+    //array_unique élémine des doublons      
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+
 public function eraseCredentials() {}
 public function getSalt() {}
 public function getUsername() {}

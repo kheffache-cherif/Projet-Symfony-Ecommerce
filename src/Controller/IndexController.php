@@ -47,11 +47,10 @@ class IndexController extends AbstractController  //tous les controller doivent 
                 return $this->render('articles/index.html.twig',[ 
                   'form' =>$form->createView(),'article'=> $articles]);
           }
-        //,['name' => $name]);
-        // la methode render vient de l'heritage AbstractController
-      //[] c'est array() tableau le nom du model et sa valeur $name
+  
 
 
+   /*----------------------creation d'un nouveau Article -------------------------------------*/
 
  /**
      * @Route("/article/new", name="new_article")
@@ -73,13 +72,13 @@ class IndexController extends AbstractController  //tous les controller doivent 
   
           return $this->redirectToRoute('article_list');
         }
-        return $this->render('articles/new.html.twig',[
+        return $this->render('articles/nouveau.html.twig',[
             'formAjouter' => $form->createView()]);
     }
 
 
 
-    // creation d'un nouveau article avnt la creation de articlesType
+    // creation d'un nouveau article avnt la creation du formulaire  articlesType
    
     // public function new(Request $request) {
     //     $article = new Articles();
@@ -109,7 +108,8 @@ class IndexController extends AbstractController  //tous les controller doivent 
     // }
 
 
-        //afficher details article: un seul article
+
+      /*-----------------------------------afficher details article: un seul article-----------------------*/
       /**
      * @Route("/article/{id}", name="article_show")
      */
@@ -120,13 +120,13 @@ class IndexController extends AbstractController  //tous les controller doivent 
          array('article' => $article));  //array c'est pareil que []
       }
 
-        //Modifier un article
+      /*--------------------------------------Modifier un article----------------------------------------------*/
   
     /**
      * @Route("/article/edit/{id}", name="edit_article")
      * Method({"GET", "POST"})
      */
-    // Modifier un article
+    // 
     public function edit(Request $request, $id) {
         $article = new Articles();
         $article = $this->getDoctrine()->getRepository(Articles::class)->find($id);
@@ -142,10 +142,10 @@ class IndexController extends AbstractController  //tous les controller doivent 
           return $this->redirectToRoute('article_list');
         }
   
-        return $this->render('articles/edit.html.twig', [
+        return $this->render('articles/modifier.html.twig', [
             'formModifier' => $form->createView()]);
       }
-      //Supprimer un article 
+      /*----------------------------------Supprimer un article ----------------------------------------------*/
 
        /**
      * @Route("/article/delete/{id}",name="delete_article")

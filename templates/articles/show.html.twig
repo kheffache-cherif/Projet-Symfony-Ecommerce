@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ article.nom }}{% endblock %}
 {% block body %}
-    <h1>{{ article.nom }}</h1>
-    <p>{{ article.description }}</p>
-    <p>{{ article.image }}</p>
-    <p>{{ article.prix }}</p>
-    <p>{{ article.categories.titre }}</p>
-    <hr>
+   <article>   {# je declare un article   #}
+            <h2>{{article.nom}}</h2>
+            <div class="metadata"> classée dans la  catégorie {{article.categories.titre}}         </div>
+            <div class="content">
+            <img src="{{article.image}}" alt="">
+            <p align="center">{{article.description | raw}}</p>
+            {{article.prix | raw}}
+            </div>
+        </article>
 <a href="/">Retour</a>
 {% endblock %}
