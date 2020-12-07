@@ -2,45 +2,52 @@
 
 namespace App\Controller;
 
-use App\Repository\ArticlesRepository;
+//use App\Repository\ArticlesRepository;
+use App\Service\Cart\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+//use Symfony\Component\HttpFoundation\Request;
+//use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\HttpFoundation\Session\Session;
+//use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
+    
     /**
      * @Route("/panier", name="cart_index")
      */
-    public function index(SessionInterface $session, ArticlesRepository $articlesRepository): Response
+    public function index(CartService $cartService)
     {
-        $panier = $session->get('panier',[]);
-        $panierAvecDonnees = [];
-        foreach($panier as $id=> $quantites){
+           // $panierAvecDonnees = $cartService->getPanierComplet();  iciiiii
+   
 
-            $panierAvecDonnees[] =[
-                'article' => $articlesRepository->find($id),
-                'quantites'=> $quantites
+        //SessionInterface $session, ArticlesRepository $articlesRepository): Response
+    
+    //     $panier = $session->get('panier',[]);
+    //     $panierAvecDonnees = [];
+    //     foreach($panier as $id=> $quantites){
 
-            ];
+    //         $panierAvecDonnees[] =[
+    //             'article' => $articlesRepository->find($id),
+    //             'quantites'=> $quantites
+
+    //         ];
 
 
-        }
-       // dd($panierAvecDonnees);
-        $total = 0;
+    //     }
+    //    // dd($panierAvecDonnees);
+       // $total = $cartService->getTotal();    ////  la aaa
 
-        foreach($panierAvecDonnees as $item){
-            $totalItem = $item['article']->getPrix() * $item['quantites'];
-            $total +=$totalItem;
-        }
+        // foreach($panierAvecDonnees as $item){
+        //     $totalItem = $item['article']->getPrix() * $item['quantites'];
+        //     $total +=$totalItem;
+        // }
 
 
         return $this->render('cart/index.html.twig', [
-            'items'=> $panierAvecDonnees,
-            'total'=> $total
+            'items'=>$cartService->getPanierComplet(), //   icciiiiiii
+            'total'=> $cartService->getTotal()  /// lllaa
         ]);
     }
 
@@ -48,8 +55,14 @@ class CartController extends AbstractController
  * @Route("/panier/ajouter/{id}", name="cart_ajouter")
  */
 
-    public function add($id, SessionInterface $session){//Request $request){
-        //$session = $request->getSession();   utilisation du container de service 
+    public function ajouter($id, CartService $cartService)
+       {
+                 $cartService->ajouter($id);
+
+                 // LA Methode Ajouter au service  avant la creation d'un service 
+    //SessionInterface $session)
+    //Request $request){
+       /*  //$session = $request->getSession();   utilisation du container de service 
         $panier = $session->get('panier',[]);
 
         if(!empty( $panier[$id])){
@@ -62,19 +75,23 @@ class CartController extends AbstractController
 
      
         $session->set('panier',$panier);
-       // dd($session->get('panier'));
+       // dd($session->get('panier')); */
        return $this->redirectToRoute("cart_index");
 
     }
     /**
      * @Route("/panier/supprimer/{id}", name="cart_supprimer")
      */
-    public function supprimer($id,SessionInterface $session ){
+    public function supprimer($id,CartService $cartService)
+    {
+        $cartService->supprimer($id);
+    
+  /*   SessionInterface $session ){
         $panier = $session->get('panier',[]);
         if(!empty( $panier[$id]))  {
             unset( $panier[$id]);
     }
-        $session->set('panier',$panier);
+        $session->set('panier',$panier); */
         return $this->redirectToRoute("cart_index");
     }
 }
