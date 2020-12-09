@@ -45,9 +45,11 @@
          <td>{{ article.categories.titre }}</td>
           <td>
             <a href="/article/{{ article.id }}" class="btn btn-success">Détails</a>
+       {% if is_granted('ROLE_EDITOR') %}
             <a href="/article/edit/{{ article.id }}" class="btn btn-dark">Modifier</a>
             <a href="/article/delete/{{ article.id }}" class="btn btn-danger"
             onclick="return confirm('Etes-vous sûr de supprimer cet article?');">Supprimer</a>
+         {% endif %}
              <a href="{{path('cart_ajouter',{'id':article.id})}}" class="btn btn-success float-right">
                         <i class="fas fa-shopping-cart mr-1"></i>
                         Panier

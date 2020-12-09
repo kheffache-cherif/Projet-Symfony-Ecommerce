@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title%} Liste des Utilisateurs{% endblock %}
+    {% block body %}
+    <h1>Litse des Utilisateurs</h1>
+    <table id="membres" class="table table-striped">
+        <thead>
+            <tr>
+            <th>Id</th>
+            <th>email</th>
+            <th>roles</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for membre in membres %}
+            <tr>
+            <td>{{ membre.id }}</td>
+            <td>{{ membre.email }}</td>
+            <td>
+               {% for role in membre.roles %}
+        
+                 {% if role=="ROLE_USER" %}
+                      Utilisateur
+                 {% elseif role=="ROLE_EDITOR" %}
+                      Editeur
+                {% elseif role=="ROLE_ADMIN" %}
+                      Administrateur
+                 {% endif %}
+                {% endfor %}
+             </td>
+           <td>
+              <a href="{{ path('admin_modifier_utilisateur', {'id': membre.id }) }}" class="btn btn-dark">Modifier</a>
+             
+            {# <a href="/admin/edituser/{{ membre.id }}" class="btn btn-dark">Modifier</a>
+           #}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+{% endblock %}

@@ -23,10 +23,10 @@
         {% for item in items %}
             <tr>
                 <td>{{item.article.nom}}</td>
-                <td>{{item.article.prix}}</td>
+                <td>{{item.article.prix}} €</td>
                 <td>{{item.article.nom}}</td>
                 <td>{{item.quantites}}</td>
-                <td>{{item.article.prix * item.quantites}}</td>
+                <td>{{item.article.prix * item.quantites}} €</td>
                 <td>
                     <a href="{{path('cart_supprimer', {'id': item.article.id})}}" class="btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i>
@@ -38,7 +38,7 @@
        <tr>
            <td colspan="3" class="text-right">Total : 
            </td>
-           <td>{{total}}</td>
+           <td>{{total}} €</td>
            <td></td>
        </tr>
        <tfoot>

@@ -10,22 +10,37 @@ use App\Form\CategoriesRechercheType;
 use App\Form\CategoriesType;
 use App\Form\RechercheType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+//use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+//use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+//use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Response;
 Use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
 class IndexController extends AbstractController  //tous les controller doivent hérité de cette class
 {
 
-   /*----------------------Recherche Article par Nom---------------------------------*/
 /**
-    *@Route("/",name="article_list")
+ *@Route("/",name="Accueil") 
+ */
+public function Acceuil(Request $request){
+  return $this->render('articles/acceuil.html.twig');
+
+}
+
+
+
+
+   /*----------------------Recherche Article par Nom---------------------------------*/
+
+/**
+    *@Route("/Articles",name="article_list")
     */
            
-            public function home(Request $request)
+            public function Articles(Request $request)
             {
               $recherche = new Recherche();
               $form = $this->createForm(RechercheType::class,$recherche);
@@ -53,6 +68,7 @@ class IndexController extends AbstractController  //tous les controller doivent 
    /*----------------------creation d'un nouveau Article -------------------------------------*/
 
  /**
+     * @IsGranted("ROLE_EDITOR")
      * @Route("/article/new", name="new_article")
      * Method({"GET", "POST"})
      */
@@ -123,6 +139,7 @@ class IndexController extends AbstractController  //tous les controller doivent 
       /*--------------------------------------Modifier un article----------------------------------------------*/
   
     /**
+     * @IsGranted("ROLE_EDITOR")
      * @Route("/article/edit/{id}", name="edit_article")
      * Method({"GET", "POST"})
      */
@@ -147,7 +164,8 @@ class IndexController extends AbstractController  //tous les controller doivent 
       }
       /*----------------------------------Supprimer un article ----------------------------------------------*/
 
-       /**
+  /**
+    * @IsGranted("ROLE_EDITOR")
      * @Route("/article/delete/{id}",name="delete_article")
      * @Method({"DELETE"})
      */

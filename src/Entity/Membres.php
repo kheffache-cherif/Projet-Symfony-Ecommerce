@@ -46,8 +46,6 @@ class Membres Implements UserInterface{
     * @Assert\Length(
     * min = 8,
     * minMessage = "Votre mot de passe doit comporter au minimum {{ limit }} caractères")
-    * @Assert\EqualTo(propertyPath = "confirm_password",
-    * message="Vous n'avez pas saisi le même mot de passe !" )
     */
     private $password;
 
@@ -151,5 +149,10 @@ class Membres Implements UserInterface{
 public function eraseCredentials() {}
 public function getSalt() {}
 public function getUsername() {}
+
+public function __toString()
+{
+    return $this->email;
+}
 
 }
