@@ -4,10 +4,12 @@ namespace App\Controller;
 use App\Entity\Articles;
 use App\Entity\Categories;
 use App\Entity\CategoriesRecherche;
+use App\Entity\PrixRecherche;
 use App\Entity\Recherche;
 use App\Form\ArticlesType;
 use App\Form\CategoriesRechercheType;
 use App\Form\CategoriesType;
+use App\Form\PrixRechercheType;
 use App\Form\RechercheType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 //use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -234,12 +236,30 @@ public function Acceuil(Request $request){
         'form' => $form->createView(),'articles' => $articles]);
   }
   
+  /*-------------Recherche Article par Prix compris entre min et max----------------*/
 
 
+  /**
+* @Route("/art_prix/", name="article_par_prix")
+* Method({"GET"})
+*/
+public function articlesParPrix(Request $request)
+{
+  $prixRecherche = new PrixRecherche();  /// notre objet de type PrixRe....
+  $form = $this->createForm(PrixRechercheType::class,$prixRecherche);
+  $form->handleRequest($request);
+  $articles= [];
 
-
-
-  
+  if($form->isSubmitted() && $form->isValid()) {
+        $minPrix = $prixRecherche->getMinPrix();
+        $maxPrix = $prixRecherche->getMaxPrix();
+        $articles= $this->getDoctrine()->getRepository(Articles::class)->findByPriceRange($minPrix,$maxPrix);
+  }
+  return
+            $this->render('articles/articlesParPrix.html.twig',[
+               'formPrixRech' =>$form->createView(),
+                'articles' => $articles]);
+}
 
 
 }
