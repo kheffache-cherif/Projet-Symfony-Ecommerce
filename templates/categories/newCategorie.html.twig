@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block title %}Ajouter Categorie{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="../assets/css/article.css">{% endblock %}
+  
 {% block body %}
-    {{ form_start(formNewCat) }}
-    {{ form_widget(formNewCat) }}
-    <button type="submit" class="btn btn-success">Créer</button>
-    {{ form_end(formNewCat) }}
+    <div class="base">
+        <div class="container">
+            {{ form_start(formNewCat) }}
+            {{ form_widget(formNewCat) }}
+            <button type="submit" class="btn btn-success">Créer</button>
+            {{ form_end(formNewCat) }}
+        </div>
+       </div>     
 {% endblock %}

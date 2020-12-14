@@ -1,0 +1,38 @@
+.image {
+  background-image: url("../images/acceuil.jpg");
+  background-repeat: no-repeat;
+  background-size: center;
+  height: 600px;
+}
+
+.base {
+  background-image: url("../images/base.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.base {
+  background-image: url("../images/lehavre-boutique.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 750px;
+}
+.ta-classe-parente h1 {
+  color: rgba(226, 11, 11, 0.459);
+}
+
+.liste {
+  background-image: url("../images/listeproduit.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 750px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding-top: 100px;
+}

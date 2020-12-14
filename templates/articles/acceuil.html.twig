@@ -1,12 +1,36 @@
 
-{% extends 'base.html.twig' %}
-{% block title%} Liste des Articles{% endblock %}
-{% block body %}
-<h1 class="display-3">Bienvenue{% if app.user.nom is defined %} {{app.user.nom}}{% endif %}!
+{% extends 'base.html.twig' %} 
+{% block stylesheets %}<link rel="stylesheet" href="../assets/css/article.css">{% endblock %}
+
+{% block title%} Liste des Articles{% endblock %}  
+{% block body  %}
+
+
+<div class = "image">
+         
+
+<h1 class="display-3">Bienvenue Dans MultimediaShop{% if app.user.nom is defined %}{{app.user.nom}}{% endif %}!</h1>
 
 
 
+    <p style ="background-color: green;"><b>C'est parti pour la chasse aux cadeaux de Noël!!!!!!!</b></p>
 
 
-
+        <p>le site vous présente une large sélection de produits de haute qualité à prix imbattable.
+        laissez-vous séduire par nos différentes sélections, à savoir: SMARTPHONE, TÉLEVISEUR,
+        IMPRIMANTE ET PC PORTABLE. Disponible en déstockage avec 25% de reduction.  
+        </p>
+        </div>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

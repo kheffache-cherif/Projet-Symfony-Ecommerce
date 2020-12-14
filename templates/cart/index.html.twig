@@ -2,11 +2,12 @@
 
 {% block title %}Hello CartController!
 {% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="../assets/css/panier.css">{% endblock %}
 
 {% block body %}
-    <div class="bg-light p-3">
+<div class="container">
+    <div class = "fondPanier">
         <h1>Votre panier</h1>
-    </div>
     {% if items | length > 0 %}
     <table class="table">
        <thead>
@@ -51,4 +52,6 @@
 
 
     <p>Régalez vous c'est bientot Noël!!!!!</p>
+    </div>
+    </div>
 {% endblock %}

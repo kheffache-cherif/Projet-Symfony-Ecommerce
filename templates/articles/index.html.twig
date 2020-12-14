@@ -1,66 +1,68 @@
 {% extends 'base.html.twig' %}
 {% block title%} Liste des Articles{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="../assets/css/article.css">{% endblock %}
+  
 {% block body %}
+    <div class="liste">
+        <div class="container">
+        <h1>Pour afficher l'ensemble des produits; veuillez lancer une recherche sans paramètres</h1>
    
-{{ form_start(form) }}
+    {{ form_start(form) }}
 
-<div class="form-row align-items-end" >
- <div class="col">
-   {{ form_row(form.nom) }}
- </div>
-
-  <div class="col">
-   <div class="form-group">
-      <button type="submit" class="btn btn-success">Rechercher</button>
+    <div class="form-row align-items-end" >
+      <div class="col">
+      {{ form_row(form.nom) }}
     </div>
- </div>
-</div>
- {{ form_end(form) }}
 
-
- {% if article %}
-    <table id="articles" class="table table-striped">
-      <thead>
-        <tr>
-          <th>nom</th>
-          <th>description</th>
-          <th>image</th>
-          <th>prix</th>
-          <th>Categorie</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <body>
-        {% for article in article %}
-        <tr>
-         <td>{{ article.nom }}</td>
-         
-         <td>{{ article.description }}</td>
-         
-         <td><img src="{{article.image}}" alt=""></td>
-         
-         <td>{{ article.prix }}</td>
-         
+      <div class="col">
+      <div class="form-group">
+          <button type="submit" class="btn btn-success">Rechercher</button>
+        </div>
+    </div>
+    </div>
+    {{ form_end(form) }}
+    {% if articles %}
+        <table id="articles" class="table table-striped">
+          <thead>
+            <tr>
+              <th>nom</th>
+              <th>description</th>
+              <th>image</th>
+              <th>prix</th>
+              <th>Categorie</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <body>
+            {% for article in articles %}
+            <tr>
+            <td>{{ article.nom }}</td>
             
-         <td>{{ article.categories.titre }}</td>
-          <td>
-            <a href="/article/{{ article.id }}" class="btn btn-success">Détails</a>
-       {% if is_granted('ROLE_EDITOR') %}
-            <a href="/article/edit/{{ article.id }}" class="btn btn-dark">Modifier</a>
-            <a href="/article/delete/{{ article.id }}" class="btn btn-danger"
-            onclick="return confirm('Etes-vous sûr de supprimer cet article?');">Supprimer</a>
-         {% endif %}
-             <a href="{{path('cart_ajouter',{'id':article.id})}}" class="btn btn-success float-right">
-                        <i class="fas fa-shopping-cart mr-1"></i>
-                        Panier
-                    </a>
-        </td>
-          </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>Aucun articles</p>
-  {% endif %} 
+            <td>{{ article.description }}</td>
+            
+            <td><img src="{{article.image}}" alt=""></td>
+            
+            <td>{{ article.prix }}</td>
+            
+                
+            <td>{{ article.categories.titre }}</td>
+              <td>
+                <a href="/article/{{ article.id }}" class="btn btn-success">Détails</a>
+          {% if is_granted('ROLE_EDITOR') %}
+                <a href="/article/edit/{{ article.id }}" class="btn btn-dark">Modifier</a>
+                <a href="/article/delete/{{ article.id }}" class="btn btn-danger"
+                onclick="return confirm('Etes-vous sûr de supprimer cet article?');">Supprimer</a>
+            {% endif %}
+                <a href="{{path('cart_ajouter',{'id':article.id})}}" class="btn btn-success float-right">
+                            <i class="fas fa-shopping-cart mr-1"></i>AjouterAuPanier</a>
+            </td>
+              </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+      {% endif %} 
+      </div>
+    </di>
 {% endblock %}

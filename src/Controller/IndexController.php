@@ -62,7 +62,7 @@ public function Acceuil(Request $request){
                 $articles= $this->getDoctrine()->getRepository(Articles::class)->findAll();
              }
                 return $this->render('articles/index.html.twig',[ 
-                  'form' =>$form->createView(),'article'=> $articles]);
+                  'form' =>$form->createView(),'articles'=> $articles]);
           }
   
 

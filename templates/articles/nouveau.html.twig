@@ -1,20 +1,22 @@
 {% extends 'base.html.twig' %}
 {% block title %}Ajouter Article{% endblock %}
-
+{% block stylesheets %}<link rel="stylesheet" href="../assets/css/article.css">{% endblock %}
+  
 {% block body %}
+    <div class="base">
+        <div class="container">
+            {{ form_start(formAjouter, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_row(formAjouter.nom,{'attr':{'placeholder':" le titre de l'article"}}) }}
+            {{ form_row(formAjouter.categories)}}
 
+            {{ form_row(formAjouter.description,{'attr':{'placeholder':"La description de l'article"}}) }}
+            {{ form_row(formAjouter.prix ,{'attr':{'placeholder':"Le prix de l'article en euros"}}) }}
+            {{ form_row(formAjouter.image ,{'attr':{'placeholder':"L'URL de l'image associée"}}) }}
 
+            {#{{ form_widget(formAjouter) }}#}
 
-{{ form_start(formAjouter, {'attr': {'novalidate': 'novalidate'}}) }}
-{{ form_row(formAjouter.nom,{'attr':{'placeholder':" le titre de l'article"}}) }}
-{{ form_row(formAjouter.categories)}}
-
-{{ form_row(formAjouter.description,{'attr':{'placeholder':"La description de l'article"}}) }}
-{{ form_row(formAjouter.prix ,{'attr':{'placeholder':"Le prix de l'article en euros"}}) }}
-{{ form_row(formAjouter.image ,{'attr':{'placeholder':"L'URL de l'image associée"}}) }}
-
-{#{{ form_widget(formAjouter) }}#}
-
-<button type="submit" class="btn btn-success">Créer</button>
-{{ form_end(formAjouter) }}
+            <button type="submit" class="btn btn-success">Créer</button>            
+            {{ form_end(formAjouter) }}
+       </div>
+    </div>
 {% endblock %}
