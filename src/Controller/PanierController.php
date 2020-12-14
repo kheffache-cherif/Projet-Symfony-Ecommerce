@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 //use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CartController extends AbstractController
+class PanierController extends AbstractController
 {
     
     /**
@@ -45,7 +45,7 @@ class CartController extends AbstractController
         // }
 
 
-        return $this->render('cart/index.html.twig', [
+        return $this->render('panier/panier.html.twig', [
             'items'=>$cartService->getPanierComplet(), //   icciiiiiii
             'total'=> $cartService->getTotal()  /// lllaa
         ]);

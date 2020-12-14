@@ -29,8 +29,8 @@
                 <td>{{item.quantites}}</td>
                 <td>{{item.article.prix * item.quantites}} €</td>
                 <td>
-                    <a href="{{path('cart_supprimer', {'id': item.article.id})}}" class="btn btn-danger btn-sm">
-                        <i class="fas fa-trash"></i>
+                    <a href="{{path('cart_supprimer', {'id': item.article.id})}}" class="btn btn-danger"
+            onclick="return confirm('Etes-vous sûr de supprimer cet article?');">Supprimer</a>
                     </a>
                 </td>
             </tr> 
